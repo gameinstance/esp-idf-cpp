@@ -50,6 +50,12 @@ public:
 		if (_base == nullptr)
 			throw error_type{"creation failed"};
 	}
+	event_group(const event_group&) = delete;
+	event_group(event_group&& other) = delete;
+
+	event_group& operator=(const event_group&) = delete;
+	event_group& operator=(event_group&& other) = delete;
+
 	~event_group()
 	{
 		vEventGroupDelete(_base);
@@ -77,6 +83,12 @@ public:
 		if (esp_event_loop_create_default() != ESP_OK)
 			throw error_type{"creation failed"};
 	}
+	esp_event_loop_default(const esp_event_loop_default&) = delete;
+	esp_event_loop_default(esp_event_loop_default&& other) = delete;
+
+	esp_event_loop_default& operator=(const esp_event_loop_default&) = delete;
+	esp_event_loop_default& operator=(esp_event_loop_default&& other) = delete;
+
 	~esp_event_loop_default()
 	{
 		esp_event_loop_delete_default();
@@ -97,6 +109,12 @@ public:
 		if (esp_netif_init() != ESP_OK)
 			throw error_type{"creation failed"};
 	}
+	esp_netif(const esp_netif&) = delete;
+	esp_netif(esp_netif&& other) = delete;
+
+	esp_netif& operator=(const esp_netif&) = delete;
+	esp_netif& operator=(esp_netif&& other) = delete;
+
 	~esp_netif()
 	{
 		esp_netif_deinit();
@@ -109,6 +127,12 @@ public:
 		: _base{esp_netif_create_default_wifi_sta()}  // WARNING: on init error this API aborts
 	{
 	}
+	esp_netif_default_wifi_sta(const esp_netif_default_wifi_sta&) = delete;
+	esp_netif_default_wifi_sta(esp_netif_default_wifi_sta&& other) = delete;
+
+	esp_netif_default_wifi_sta& operator=(const esp_netif_default_wifi_sta&) = delete;
+	esp_netif_default_wifi_sta& operator=(esp_netif_default_wifi_sta&& other) = delete;
+
 	~esp_netif_default_wifi_sta()
 	{
 		esp_netif_destroy_default_wifi(_base);
@@ -133,6 +157,12 @@ public:
 		if (esp_wifi_init(&_config) != ESP_OK)
 			throw error_type{"creation failed"};
 	}
+	esp_wifi(const esp_wifi&) = delete;
+	esp_wifi(esp_wifi&& other) = delete;
+
+	esp_wifi& operator=(const esp_wifi&) = delete;
+	esp_wifi& operator=(esp_wifi&& other) = delete;
+
 	~esp_wifi()
 	{
 		esp_wifi_deinit();
@@ -204,6 +234,12 @@ public:
 		if (esp_wifi_start() != ESP_OK)
 			throw error_type{"start failed"};
 	}
+	esp_wifi_station(const esp_wifi_station&) = delete;
+	esp_wifi_station(esp_wifi_station&& other) = delete;
+
+	esp_wifi_station& operator=(const esp_wifi_station&) = delete;
+	esp_wifi_station& operator=(esp_wifi_station&& other) = delete;
+
 	~esp_wifi_station()
 	{
 		esp_wifi_stop();
@@ -226,6 +262,12 @@ public:
 													event_handler, event_arg, &_instance) != ESP_OK)
 			throw error_type{"creation failed"};
 	}
+	esp_wifi_event_handler(const esp_wifi_event_handler&) = delete;
+	esp_wifi_event_handler(esp_wifi_event_handler&& other) = delete;
+
+	esp_wifi_event_handler& operator=(const esp_wifi_event_handler&) = delete;
+	esp_wifi_event_handler& operator=(esp_wifi_event_handler&& other) = delete;
+
 	~esp_wifi_event_handler()
 	{
 		esp_event_handler_instance_unregister(WIFI_EVENT, ESP_EVENT_ANY_ID, _instance);
@@ -247,9 +289,15 @@ public:
 		: _instance{}
 	{
 		if (esp_event_handler_instance_register(IP_EVENT, IP_EVENT_STA_GOT_IP,
-			event_handler, event_arg, &_instance) != ESP_OK)
+				event_handler, event_arg, &_instance) != ESP_OK)
 			throw error_type{"creation failed"};
 	}
+	esp_connection_event_handler(const esp_connection_event_handler&) = delete;
+	esp_connection_event_handler(esp_connection_event_handler&& other) = delete;
+
+	esp_connection_event_handler& operator=(const esp_connection_event_handler&) = delete;
+	esp_connection_event_handler& operator=(esp_connection_event_handler&& other) = delete;
+
 	~esp_connection_event_handler()
 	{
 		esp_event_handler_instance_unregister(WIFI_EVENT, IP_EVENT_STA_GOT_IP, _instance);
@@ -290,6 +338,13 @@ public:
 			throw error_type{"unexpected connection event"};
 		}
 	}
+	wifi_sta(const wifi_sta&) = delete;
+	wifi_sta(wifi_sta&& other) = delete;
+
+	wifi_sta& operator=(const wifi_sta&) = delete;
+	wifi_sta& operator=(wifi_sta&& other) = delete;
+
+	~wifi_sta() = default;
 
 	static void event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data)
 	{

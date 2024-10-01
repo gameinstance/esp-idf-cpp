@@ -61,7 +61,7 @@ public:
 			: basics::error{std::string{"esp::io::spi_bus: "}.append(what_arg).c_str()} {}
 	};
 
-	spi_bus(const config_type &config)
+	explicit spi_bus(const config_type &config)
 		: _config{config}
 	{
 		spi_bus_config_t spi_bus_config = {
@@ -84,6 +84,11 @@ public:
 		if (ret != ESP_OK)
 			throw error_type{"esp::io::spi_bus init failed"};
 	}
+	spi_bus(const spi_bus&) = delete;
+	spi_bus(spi_bus&& other) = delete;
+
+	spi_bus& operator=(const spi_bus&) = delete;
+	spi_bus& operator=(spi_bus&& other) = delete;
 
 	~spi_bus()
 	{

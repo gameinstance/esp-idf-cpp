@@ -88,6 +88,11 @@ public:
 			throw error_type{"failed to initialize card"};
 		}
 	}
+	spi_sd(const spi_sd&) = delete;
+	spi_sd(spi_sd&& other) = delete;
+
+	spi_sd& operator=(const spi_sd&) = delete;
+	spi_sd& operator=(spi_sd&& other) = delete;
 
 	~spi_sd()
 	{

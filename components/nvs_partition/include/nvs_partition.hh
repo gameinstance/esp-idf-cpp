@@ -56,6 +56,12 @@ public:
 		if (ret != ESP_OK)
 			throw error_type{};
 	}
+	nvs_partition(const nvs_partition&) = delete;
+	nvs_partition(nvs_partition&& other) = delete;
+
+	nvs_partition& operator=(const nvs_partition&) = delete;
+	nvs_partition& operator=(nvs_partition&& other) = delete;
+
 	~nvs_partition()
 	{
 		nvs_flash_deinit();
